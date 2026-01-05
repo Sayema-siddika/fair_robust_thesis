@@ -1,8 +1,8 @@
-# Understanding the Week 1 Results
+# Understanding the Results
 ## Fairness Metrics Explanation
 
 **Date**: December 6, 2025  
-**Context**: Week 1 Checkpoint Results Analysis
+**Context**: Results Analysis
 
 ---
 
@@ -26,7 +26,7 @@ Where TPR = True Positive Rate = TP / (TP + FN)
 
 ---
 
-## 🔍 Week 1 Results Breakdown
+## 🔍 Results Breakdown
 
 ### ADULT Dataset (30K samples)
 
@@ -108,7 +108,7 @@ Meta:      ████▌ 0.0112 EO disparity (MUCH BETTER!)
 | Greedy | 0.0526 | **-1.4%** ❌ (worse!) |
 | Meta | 0.0112 | **+78.4%** ✅ (much better!) |
 
-**Winner**: Meta-Selector (+79.8pp vs Greedy) ⭐ **BEST RESULT**
+**Winner**: Meta-Selector (+79.8pp vs Greedy)  **BEST RESULT**
 
 ### GERMAN (1K samples)
 
