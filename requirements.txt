@@ -1,0 +1,22 @@
+# Core Dependencies
+torch==1.13.0
+torchvision==0.14.0
+numpy==1.24.0
+pandas==1.5.3
+scikit-learn==1.2.2
+
+# Visualization
+matplotlib==3.7.1
+seaborn==0.12.2
+plotly==5.14.0
+
+# Utilities
+pyyaml==6.0
+tqdm==4.65.0
+tensorboard==2.12.0
+
+# Fairness libraries
+fairlearn==0.9.0
+
+# Testing
+pytest==7.3.0

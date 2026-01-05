@@ -1,0 +1,110 @@
+{
+  "german": {
+    "confidence_T0.5": {
+      "baseline_acc": 0.72,
+      "baseline_eo": 0.3142857142857143,
+      "weighted_acc": 0.7233333333333334,
+      "weighted_eo": 0.37142857142857144,
+      "improvement": -18.181818181818187
+    },
+    "confidence_T1.0": {
+      "baseline_acc": 0.72,
+      "baseline_eo": 0.3142857142857143,
+      "weighted_acc": 0.73,
+      "weighted_eo": 0.37142857142857144,
+      "improvement": -18.181818181818187
+    },
+    "confidence_T2.0": {
+      "baseline_acc": 0.72,
+      "baseline_eo": 0.3142857142857143,
+      "weighted_acc": 0.72,
+      "weighted_eo": 0.3142857142857143,
+      "improvement": 0.0
+    },
+    "entropy_T0.5": {
+      "baseline_acc": 0.72,
+      "baseline_eo": 0.3142857142857143,
+      "weighted_acc": 0.73,
+      "weighted_eo": 0.4,
+      "improvement": -27.27272727272728
+    },
+    "entropy_T1.0": {
+      "baseline_acc": 0.72,
+      "baseline_eo": 0.3142857142857143,
+      "weighted_acc": 0.73,
+      "weighted_eo": 0.37142857142857144,
+      "improvement": -18.181818181818187
+    },
+    "entropy_T2.0": {
+      "baseline_acc": 0.72,
+      "baseline_eo": 0.3142857142857143,
+      "weighted_acc": 0.73,
+      "weighted_eo": 0.37142857142857144,
+      "improvement": -18.181818181818187
+    },
+    "margin_T0.5": {
+      "baseline_acc": 0.72,
+      "baseline_eo": 0.3142857142857143,
+      "weighted_acc": 0.7333333333333333,
+      "weighted_eo": 0.5714285714285714,
+      "improvement": -81.81818181818181
+    },
+    "margin_T1.0": {
+      "baseline_acc": 0.72,
+      "baseline_eo": 0.3142857142857143,
+      "weighted_acc": 0.73,
+      "weighted_eo": 0.42857142857142855,
+      "improvement": -36.36363636363636
+    },
+    "margin_T2.0": {
+      "baseline_acc": 0.72,
+      "baseline_eo": 0.3142857142857143,
+      "weighted_acc": 0.7233333333333334,
+      "weighted_eo": 0.37142857142857144,
+      "improvement": -18.181818181818187
+    },
+    "adaptive_T0.5": {
+      "baseline_acc": 0.72,
+      "baseline_eo": 0.3142857142857143,
+      "weighted_acc": 0.72,
+      "weighted_eo": 0.3142857142857143,
+      "improvement": 0.0
+    },
+    "adaptive_T1.0": {
+      "baseline_acc": 0.72,
+      "baseline_eo": 0.3142857142857143,
+      "weighted_acc": 0.7066666666666667,
+      "weighted_eo": 0.14285714285714285,
+      "improvement": 54.545454545454554
+    },
+    "adaptive_T2.0": {
+      "baseline_acc": 0.72,
+      "baseline_eo": 0.3142857142857143,
+      "weighted_acc": 0.7066666666666667,
+      "weighted_eo": 0.14285714285714285,
+      "improvement": 54.545454545454554
+    }
+  },
+  "noisy": {
+    "0.0": {
+      "baseline_acc": 0.9916666666666667,
+      "weighted_acc": 0.985,
+      "improvement": -0.00666666666666671
+    },
+    "0.1": {
+      "baseline_acc": 0.6616666666666666,
+      "weighted_acc": 0.6583333333333333,
+      "improvement": -0.0033333333333332993
+    },
+    "0.2": {
+      "baseline_acc": 0.3383333333333333,
+      "weighted_acc": 0.3416666666666667,
+      "improvement": 0.003333333333333355
+    },
+    "0.3": {
+      "baseline_acc": 0.008333333333333333,
+      "weighted_acc": 0.015,
+      "improvement": 0.006666666666666666
+    }
+  }
+}

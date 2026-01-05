@@ -1,0 +1,100 @@
+{
+  "datasets": {
+    "compas": {
+      "baseline": {
+        "accuracy": 0.6922246220302376,
+        "eo_disparity": 0.3045292716855681,
+        "dp_disparity": 0.2544082486551106
+      },
+      "greedy": {
+        "accuracy": 0.6938444924406048,
+        "eo_disparity": 0.31068893971188083,
+        "dp_disparity": 0.2624215481171548
+      },
+      "adaptive": {
+        "accuracy": 0.6938444924406048,
+        "eo_disparity": 0.3078478296748638,
+        "dp_disparity": 0.24987858637178723
+      },
+      "improvements": {
+        "greedy": -2.022685041808626,
+        "adaptive": -1.0897336636729527
+      }
+    },
+    "adult": {
+      "baseline": {
+        "accuracy": 0.8090396728920323,
+        "eo_disparity": 0.050771895587979454,
+        "dp_disparity": 0.08825614959839358
+      },
+      "greedy": {
+        "accuracy": 0.8111393524146314,
+        "eo_disparity": 0.0411082620436134,
+        "dp_disparity": 0.08905863408993116
+      },
+      "adaptive": {
+        "accuracy": 0.8100342579290529,
+        "eo_disparity": 0.04525478983714931,
+        "dp_disparity": 0.08683439113597247
+      },
+      "improvements": {
+        "greedy": 19.0334306656338,
+        "adaptive": 10.866456111078016
+      }
+    },
+    "german": {
+      "baseline": {
+        "accuracy": 0.7266666666666667,
+        "eo_disparity": 0.37142857142857144,
+        "dp_disparity": 0.2608695652173913
+      },
+      "greedy": {
+        "accuracy": 0.73,
+        "eo_disparity": 0.5246753246753246,
+        "dp_disparity": 0.4304536043666478
+      },
+      "adaptive": {
+        "accuracy": 0.71,
+        "eo_disparity": 0.22857142857142856,
+        "dp_disparity": 0.18840579710144928
+      },
+      "improvements": {
+        "greedy": -41.258741258741246,
+        "adaptive": 38.46153846153847
+      }
+    }
+  },
+  "summary": {
+    "greedy": {
+      "mean": -8.08266521163869,
+      "max": 19.0334306656338,
+      "min": -41.258741258741246,
+      "std": 24.9843820360327
+    },
+    "adaptive": {
+      "mean": 16.079420302981177,
+      "max": 38.46153846153847,
+      "min": -1.0897336636729527,
+      "std": 16.562146165884418
+    }
+  },
+  "recommendations": {
+    "method_selection": {
+      "large_datasets": "Greedy (\u03c4=0.9) if label noise suspected, otherwise either method",
+      "medium_datasets": "Adaptive (T=0.5) for distribution shift, Greedy (\u03c4=0.9) otherwise",
+      "small_datasets": "Adaptive (T=1.0-2.0) - soft weighting essential"
+    },
+    "hyperparameters": {
+      "greedy_tau": 0.9,
+      "adaptive_T_large": 0.5,
+      "adaptive_T_small": 1.0,
+      "weighting_scheme": "adaptive"
+    },
+    "deployment_scenarios": {
+      "label_noise": "Greedy (\u03c4=0.9)",
+      "distribution_shift": "Adaptive (T=0.5)",
+      "limited_data": "Adaptive (T=1.0-2.0)",
+      "production": "Greedy (\u03c4=0.9)"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+MULTI-DATASET COMPARISON RESULTS
+======================================================================
+
+Configuration:
+  Noise rate: 10%
+  Epochs: 100
+  Greedy tau: 0.7
+  Greedy lambda: 1.5
+
+Dataset    Method     Accuracy   DP Disp    EO Disp   
+------------------------------------------------------------
+COMPAS     Baseline   0.6879     0.2485     0.3059    
+           Greedy     0.6296     0.1478     0.1657    
+           Improve    -5.83%     +45.8%      
+
+ADULT      Baseline   0.8063     0.1021     0.0726    
+           Greedy     0.7833     0.0738     0.0386    
+           Improve    -2.30%     +46.9%      
+
+GERMAN     Baseline   0.7233     0.2754     0.3714    
+           Greedy     0.6533     0.6644     0.6872    
+           Improve    -7.00%     -85.0%      
+

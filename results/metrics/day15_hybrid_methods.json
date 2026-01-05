@@ -1,0 +1,115 @@
+{
+  "datasets": {
+    "compas": {
+      "baseline": {
+        "accuracy": 0.6922246220302376,
+        "eo_disparity": 0.3045292716855681
+      },
+      "adaptive": {
+        "accuracy": 0.6900647948164147,
+        "eo_disparity": 0.28135241553297335
+      },
+      "meta": {
+        "accuracy": 0.6927645788336934,
+        "eo_disparity": 0.3045292716855681
+      },
+      "hybrid": {
+        "accuracy": 0.6927645788336934,
+        "eo_disparity": 0.29896493999481294
+      }
+    },
+    "adult": {
+      "baseline": {
+        "accuracy": 0.8090396728920323,
+        "eo_disparity": 0.050771895587979454
+      },
+      "adaptive": {
+        "accuracy": 0.8099237484804951,
+        "eo_disparity": 0.048126044763136644
+      },
+      "meta": {
+        "accuracy": 0.8097027295833794,
+        "eo_disparity": 0.04972202682157523
+      },
+      "hybrid": {
+        "accuracy": 0.8105868051718422,
+        "eo_disparity": 0.050493544214754105
+      }
+    },
+    "german": {
+      "baseline": {
+        "accuracy": 0.7266666666666667,
+        "eo_disparity": 0.37142857142857144
+      },
+      "adaptive": {
+        "accuracy": 0.7,
+        "eo_disparity": 0.14705882352941177
+      },
+      "meta": {
+        "accuracy": 0.7233333333333334,
+        "eo_disparity": 0.34285714285714286
+      },
+      "hybrid": {
+        "accuracy": 0.7066666666666667,
+        "eo_disparity": 0.2
+      }
+    }
+  },
+  "blending_analysis": {
+    "alpha_0.0": {
+      "accuracy": 0.8099237484804951,
+      "eo_disparity": 0.048126044763136644
+    },
+    "alpha_0.2": {
+      "accuracy": 0.8101447673776108,
+      "eo_disparity": 0.04970084791274293
+    },
+    "alpha_0.4": {
+      "accuracy": 0.8104762957232844,
+      "eo_disparity": 0.051275651062349215
+    },
+    "alpha_0.5": {
+      "accuracy": 0.8105868051718422,
+      "eo_disparity": 0.050493544214754105
+    },
+    "alpha_0.6": {
+      "accuracy": 0.8106973146204001,
+      "eo_disparity": 0.05154341298115833
+    },
+    "alpha_0.8": {
+      "accuracy": 0.8102552768261686,
+      "eo_disparity": 0.04840439613636188
+    },
+    "alpha_1.0": {
+      "accuracy": 0.8097027295833794,
+      "eo_disparity": 0.04972202682157523
+    }
+  },
+  "temperature_analysis": {
+    "T_0.1": {
+      "accuracy": 0.8098132390319372,
+      "eo_disparity": 0.05726474392430053,
+      "gini": 0.5577218964447077
+    },
+    "T_0.5": {
+      "accuracy": 0.8100342579290529,
+      "eo_disparity": 0.04525478983714931,
+      "gini": 0.29893632622040567
+    },
+    "T_1.0": {
+      "accuracy": 0.8099237484804951,
+      "eo_disparity": 0.048126044763136644,
+      "gini": 0.22369125312481652
+    },
+    "T_2.0": {
+      "accuracy": 0.8102552768261686,
+      "eo_disparity": 0.05178999599113515,
+      "gini": 0.14732349741437
+    },
+    "T_5.0": {
+      "accuracy": 0.8101447673776108,
+      "eo_disparity": 0.05232551982875344,
+      "gini": 0.07041854697837535
+    }
+  }
+}

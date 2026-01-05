@@ -1,0 +1,207 @@
+{
+  "compas": {
+    "methods": [
+      {
+        "name": "Baseline",
+        "accuracy": 0.6922246220302376,
+        "fairness": 0.3045292716855681
+      },
+      {
+        "name": "Greedy (70%)",
+        "accuracy": 0.6927645788336934,
+        "fairness": 0.30241906962487913
+      },
+      {
+        "name": "Fair-Constrained (Balanced)",
+        "accuracy": 0.6927645788336934,
+        "fairness": 0.30241906962487913
+      },
+      {
+        "name": "Adaptive-Weighted (T=0.5)",
+        "accuracy": 0.6927645788336934,
+        "fairness": 0.30347417065522364
+      },
+      {
+        "name": "Adaptive-Weighted (T=1.0)",
+        "accuracy": 0.6889848812095032,
+        "fairness": 0.28135241553297335
+      },
+      {
+        "name": "Adaptive-Weighted (T=2.0)",
+        "accuracy": 0.6900647948164147,
+        "fairness": 0.27156767972084034
+      },
+      {
+        "name": "Adaptive-Weighted (T=5.0)",
+        "accuracy": 0.6895248380129589,
+        "fairness": 0.27668992997430036
+      },
+      {
+        "name": "Greedy (50%)",
+        "accuracy": 0.6911447084233261,
+        "fairness": 0.30980477683729046
+      },
+      {
+        "name": "Greedy (60%)",
+        "accuracy": 0.6927645788336934,
+        "fairness": 0.3126635701317992
+      },
+      {
+        "name": "Greedy (80%)",
+        "accuracy": 0.6938444924406048,
+        "fairness": 0.2890092660269257
+      },
+      {
+        "name": "Greedy (90%)",
+        "accuracy": 0.6927645788336934,
+        "fairness": 0.3076768915191097
+      },
+      {
+        "name": "Meta-Learning",
+        "accuracy": 0.6916846652267818,
+        "fairness": 0.26894466319288896
+      }
+    ],
+    "pareto_indices": [
+      11,
+      9
+    ]
+  },
+  "adult": {
+    "methods": [
+      {
+        "name": "Baseline",
+        "accuracy": 0.809260691789148,
+        "fairness": 0.051821764354383626
+      },
+      {
+        "name": "Greedy (70%)",
+        "accuracy": 0.8073820311636645,
+        "fairness": 0.0525509239298978
+      },
+      {
+        "name": "Fair-Constrained (Balanced)",
+        "accuracy": 0.8094817106862636,
+        "fairness": 0.05206834736436039
+      },
+      {
+        "name": "Adaptive-Weighted (T=0.5)",
+        "accuracy": 0.809260691789148,
+        "fairness": 0.04972202682157523
+      },
+      {
+        "name": "Adaptive-Weighted (T=1.0)",
+        "accuracy": 0.8098132390319372,
+        "fairness": 0.04681900353233942
+      },
+      {
+        "name": "Adaptive-Weighted (T=2.0)",
+        "accuracy": 0.8100342579290529,
+        "fairness": 0.04995802037713587
+      },
+      {
+        "name": "Adaptive-Weighted (T=5.0)",
+        "accuracy": 0.8102552768261686,
+        "fairness": 0.05337538859515761
+      },
+      {
+        "name": "Greedy (50%)",
+        "accuracy": 0.8014145209415405,
+        "fairness": 0.017342222827200642
+      },
+      {
+        "name": "Greedy (60%)",
+        "accuracy": 0.8057243894352967,
+        "fairness": 0.030225328462184287
+      },
+      {
+        "name": "Greedy (80%)",
+        "accuracy": 0.8088186539949166,
+        "fairness": 0.05129682997118157
+      },
+      {
+        "name": "Greedy (90%)",
+        "accuracy": 0.8106973146204001,
+        "fairness": 0.0411082620436134
+      },
+      {
+        "name": "Meta-Learning",
+        "accuracy": 0.7992043319703834,
+        "fairness": 0.011200617213914549
+      }
+    ],
+    "pareto_indices": [
+      11,
+      7,
+      8,
+      10
+    ]
+  },
+  "german": {
+    "methods": [
+      {
+        "name": "Baseline",
+        "accuracy": 0.72,
+        "fairness": 0.3142857142857143
+      },
+      {
+        "name": "Greedy (70%)",
+        "accuracy": 0.7233333333333334,
+        "fairness": 0.34285714285714286
+      },
+      {
+        "name": "Fair-Constrained (Balanced)",
+        "accuracy": 0.73,
+        "fairness": 0.37142857142857144
+      },
+      {
+        "name": "Adaptive-Weighted (T=0.5)",
+        "accuracy": 0.72,
+        "fairness": 0.3142857142857143
+      },
+      {
+        "name": "Adaptive-Weighted (T=1.0)",
+        "accuracy": 0.7066666666666667,
+        "fairness": 0.14285714285714285
+      },
+      {
+        "name": "Adaptive-Weighted (T=2.0)",
+        "accuracy": 0.7066666666666667,
+        "fairness": 0.14285714285714285
+      },
+      {
+        "name": "Adaptive-Weighted (T=5.0)",
+        "accuracy": 0.7166666666666667,
+        "fairness": 0.22857142857142856
+      },
+      {
+        "name": "Greedy (50%)",
+        "accuracy": 0.71,
+        "fairness": 0.14285714285714285
+      },
+      {
+        "name": "Greedy (60%)",
+        "accuracy": 0.7033333333333334,
+        "fairness": 0.17142857142857143
+      },
+      {
+        "name": "Greedy (80%)",
+        "accuracy": 0.72,
+        "fairness": 0.45714285714285713
+      },
+      {
+        "name": "Greedy (90%)",
+        "accuracy": 0.7233333333333334,
+        "fairness": 0.47792207792207786
+      }
+    ],
+    "pareto_indices": [
+      7,
+      6,
+      0,
+      3,
+      1,
+      2
+    ]
+  }
+}

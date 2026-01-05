@@ -1,0 +1,113 @@
+{
+  "compas": {
+    "dataset": "compas",
+    "n_train": 4320,
+    "n_test": 1852,
+    "n_features": 5,
+    "results": {
+      "baseline": {
+        "equalized_odds": 0.3045292716855681,
+        "demographic_parity": 0.2544082486551106,
+        "accuracy": 0.6922246220302376,
+        "ece": 0.048288851594911024,
+        "brier_score": 0.20816793814922288,
+        "train_time": 0.025269746780395508
+      },
+      "adaptive": {
+        "equalized_odds": 0.3043760167873058,
+        "demographic_parity": 0.2530820382546324,
+        "accuracy": 0.6938444924406048,
+        "ece": 0.23578550388194228,
+        "brier_score": 0.26554169892917734,
+        "train_time": 0.0767977237701416,
+        "eo_improvement_pct": 0.05032517807369528,
+        "ece_degradation_pct": 388.28144818998095
+      },
+      "iterative": {
+        "equalized_odds": 0.2950333624124679,
+        "demographic_parity": 0.255309511356844,
+        "accuracy": 0.6922246220302376,
+        "ece": 0.26020357195314536,
+        "brier_score": 0.2758020028540293,
+        "train_time": 0.5020101070404053,
+        "n_iterations": 10,
+        "eo_improvement_pct": 3.1182254567977536,
+        "ece_degradation_pct": 438.848126138844
+      }
+    }
+  },
+  "adult": {
+    "dataset": "adult",
+    "n_train": 21113,
+    "n_test": 9049,
+    "n_features": 5,
+    "results": {
+      "baseline": {
+        "equalized_odds": 0.051821764354383626,
+        "demographic_parity": 0.08858167043172689,
+        "accuracy": 0.809260691789148,
+        "ece": 0.019344525461729628,
+        "brier_score": 0.13311459048096994,
+        "train_time": 0.11583900451660156
+      },
+      "adaptive": {
+        "equalized_odds": 0.04972202682157523,
+        "demographic_parity": 0.08727958709839358,
+        "accuracy": 0.809260691789148,
+        "ece": 0.16042124665919338,
+        "brier_score": 0.17012670926099063,
+        "train_time": 0.27986693382263184,
+        "eo_improvement_pct": 4.051844932274641,
+        "ece_degradation_pct": 729.284993196467
+      },
+      "iterative": {
+        "equalized_odds": 0.03579538148509531,
+        "demographic_parity": 0.07803227418602983,
+        "accuracy": 0.8119129185545364,
+        "ece": 0.16550223259439661,
+        "brier_score": 0.1737152085420873,
+        "train_time": 1.4737310409545898,
+        "n_iterations": 10,
+        "eo_improvement_pct": 30.92596917328353,
+        "ece_degradation_pct": 755.5507496000306
+      }
+    }
+  },
+  "german": {
+    "dataset": "german",
+    "n_train": 700,
+    "n_test": 300,
+    "n_features": 6,
+    "results": {
+      "baseline": {
+        "equalized_odds": 0.3142857142857143,
+        "demographic_parity": 0.2318840579710145,
+        "accuracy": 0.72,
+        "ece": 0.038768860276832746,
+        "brier_score": 0.19070452721628908,
+        "train_time": 0.011067390441894531
+      },
+      "adaptive": {
+        "equalized_odds": 0.2857142857142857,
+        "demographic_parity": 0.2028985507246377,
+        "accuracy": 0.72,
+        "ece": 0.24404307706937797,
+        "brier_score": 0.2526440359855454,
+        "train_time": 0.04626202583312988,
+        "eo_improvement_pct": 9.090909090909093,
+        "ece_degradation_pct": 529.4822064068046
+      },
+      "iterative": {
+        "equalized_odds": 0.0,
+        "demographic_parity": 0.0,
+        "accuracy": 0.7,
+        "ece": 0.29604681523877685,
+        "brier_score": 0.29704762540888785,
+        "train_time": 0.24898386001586914,
+        "n_iterations": 10,
+        "eo_improvement_pct": 100.0,
+        "ece_degradation_pct": 663.620114506401
+      }
+    }
+  }
+}

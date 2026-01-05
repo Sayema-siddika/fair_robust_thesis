@@ -1,0 +1,24 @@
+GREEDY SELECTOR vs BASELINE - COMPARISON RESULTS
+======================================================================
+
+Configuration:
+  Dataset: compas
+  Noise: 10.0%
+  Tau: 0.7
+  Lambda (initial): 1.5
+  Lambda (final): 1.51
+
+BASELINE RESULTS:
+  Accuracy: 0.6830
+  DP Disparity: 0.2417
+  EO Disparity: 0.2914
+
+GREEDY SELECTOR RESULTS:
+  Accuracy: 0.6425
+  DP Disparity: 0.1618
+  EO Disparity: 0.1956
+
+IMPROVEMENTS:
+  Accuracy: -4.05%
+  DP Disparity: +33.0%
+  EO Disparity: +32.9%

@@ -1,0 +1,295 @@
+{
+  "dataset": "adult",
+  "tests": {
+    "adversarial": {
+      "eps_0.01": {
+        "baseline": {
+          "accuracy": 0.809260691789148,
+          "eo_disparity": 0.05522854311798919
+        },
+        "greedy": {
+          "accuracy": 0.8099237484804951,
+          "eo_disparity": 0.04887638324748311
+        },
+        "adaptive": {
+          "accuracy": 0.8109183335175157,
+          "eo_disparity": 0.048126044763136644
+        }
+      },
+      "eps_0.05": {
+        "baseline": {
+          "accuracy": 0.8085976350978009,
+          "eo_disparity": 0.05287163312078785
+        },
+        "greedy": {
+          "accuracy": 0.8088186539949166,
+          "eo_disparity": 0.04179506380146286
+        },
+        "adaptive": {
+          "accuracy": 0.8087081445463588,
+          "eo_disparity": 0.03999485655071211
+        }
+      },
+      "eps_0.1": {
+        "baseline": {
+          "accuracy": 0.8083766162006851,
+          "eo_disparity": 0.04372234450520779
+        },
+        "greedy": {
+          "accuracy": 0.8080450878550116,
+          "eo_disparity": 0.02871406203907506
+        },
+        "adaptive": {
+          "accuracy": 0.8090396728920323,
+          "eo_disparity": 0.03504504300074884
+        }
+      },
+      "eps_0.2": {
+        "baseline": {
+          "accuracy": 0.8050613327439496,
+          "eo_disparity": 0.0633914996936622
+        },
+        "greedy": {
+          "accuracy": 0.8064979555752017,
+          "eo_disparity": 0.06253526666515391
+        },
+        "adaptive": {
+          "accuracy": 0.8063874461266438,
+          "eo_disparity": 0.059695780102415164
+        }
+      },
+      "eps_0.0": {
+        "baseline": {
+          "accuracy": 0.8090396728920323,
+          "eo_disparity": 0.050771895587979454
+        },
+        "greedy": {
+          "accuracy": 0.809260691789148,
+          "eo_disparity": 0.04730158009787683
+        },
+        "adaptive": {
+          "accuracy": 0.8099237484804951,
+          "eo_disparity": 0.048126044763136644
+        }
+      }
+    },
+    "distribution_shift": {
+      "shift_0.1": {
+        "baseline": {
+          "accuracy": 0.8131591013296653,
+          "eo_disparity": 0.018346603518887117
+        },
+        "greedy": {
+          "accuracy": 0.8145346171480972,
+          "eo_disparity": 0.016487633559841675
+        },
+        "adaptive": {
+          "accuracy": 0.8149931224209078,
+          "eo_disparity": 0.0165991717573844
+        }
+      },
+      "shift_0.3": {
+        "baseline": {
+          "accuracy": 0.8278850916295195,
+          "eo_disparity": 0.05325178793638641
+        },
+        "greedy": {
+          "accuracy": 0.828132738979693,
+          "eo_disparity": 0.056735358065883534
+        },
+        "adaptive": {
+          "accuracy": 0.8291233283803864,
+          "eo_disparity": 0.049115262071134536
+        }
+      },
+      "shift_0.5": {
+        "baseline": {
+          "accuracy": 0.8435859469645982,
+          "eo_disparity": 0.030510061765291918
+        },
+        "greedy": {
+          "accuracy": 0.8449320231525105,
+          "eo_disparity": 0.027326160589758897
+        },
+        "adaptive": {
+          "accuracy": 0.8445282002961367,
+          "eo_disparity": 0.025014943215780017
+        }
+      }
+    },
+    "feature_noise": {
+      "noise_0.05": {
+        "baseline": {
+          "accuracy": 0.8090396728920323,
+          "eo_disparity": 0.05890308380040388
+        },
+        "greedy": {
+          "accuracy": 0.8101447673776108,
+          "eo_disparity": 0.049926252013887285
+        },
+        "adaptive": {
+          "accuracy": 0.8103657862747264,
+          "eo_disparity": 0.04576913476593519
+        }
+      },
+      "noise_0.1": {
+        "baseline": {
+          "accuracy": 0.8058348988838546,
+          "eo_disparity": 0.05627841188439342
+        },
+        "greedy": {
+          "accuracy": 0.8082661067521273,
+          "eo_disparity": 0.04914414516629223
+        },
+        "adaptive": {
+          "accuracy": 0.8078240689578959,
+          "eo_disparity": 0.05022578229594504
+        }
+      },
+      "noise_0.2": {
+        "baseline": {
+          "accuracy": 0.8018565587357719,
+          "eo_disparity": 0.03927628642961417
+        },
+        "greedy": {
+          "accuracy": 0.8041772571554868,
+          "eo_disparity": 0.045490783392709955
+        },
+        "adaptive": {
+          "accuracy": 0.8018565587357719,
+          "eo_disparity": 0.02509246862874126
+        }
+      },
+      "noise_0.5": {
+        "baseline": {
+          "accuracy": 0.7609680627693668,
+          "eo_disparity": 0.03909324014613447
+        },
+        "greedy": {
+          "accuracy": 0.7756658194275611,
+          "eo_disparity": 0.04243648218324292
+        },
+        "adaptive": {
+          "accuracy": 0.7628467233948503,
+          "eo_disparity": 0.032783438093293094
+        }
+      }
+    },
+    "missing_features": {
+      "missing_0.1": {
+        "baseline": {
+          "accuracy": 0.8056138799867388,
+          "eo_disparity": 0.0525509239298978
+        },
+        "greedy": {
+          "accuracy": 0.8026301248756769,
+          "eo_disparity": 0.054576535281792904
+        },
+        "adaptive": {
+          "accuracy": 0.8041772571554868,
+          "eo_disparity": 0.05514382748265978
+        }
+      },
+      "missing_0.2": {
+        "baseline": {
+          "accuracy": 0.8000884075588462,
+          "eo_disparity": 0.04725922228021212
+        },
+        "greedy": {
+          "accuracy": 0.8000884075588462,
+          "eo_disparity": 0.042481865559312326
+        },
+        "adaptive": {
+          "accuracy": 0.8013040114929827,
+          "eo_disparity": 0.045931002140582544
+        }
+      },
+      "missing_0.3": {
+        "baseline": {
+          "accuracy": 0.7906951044314289,
+          "eo_disparity": 0.02226659707882339
+        },
+        "greedy": {
+          "accuracy": 0.791358161122776,
+          "eo_disparity": 0.025888190489157192
+        },
+        "adaptive": {
+          "accuracy": 0.7924632556083545,
+          "eo_disparity": 0.02225600762440716
+        }
+      },
+      "missing_0.5": {
+        "baseline": {
+          "accuracy": 0.7813018013040115,
+          "eo_disparity": 0.02502136800623264
+        },
+        "greedy": {
+          "accuracy": 0.780196706818433,
+          "eo_disparity": 0.012916108829335804
+        },
+        "adaptive": {
+          "accuracy": 0.7822963863410322,
+          "eo_disparity": 0.0184543934889983
+        }
+      }
+    },
+    "label_noise": {
+      "label_noise_0.05": {
+        "baseline": {
+          "accuracy": 0.8091501823405901,
+          "eo_disparity": 0.054650661462706196
+        },
+        "greedy": {
+          "accuracy": 0.800309426455962,
+          "eo_disparity": 0.004967370820968625
+        },
+        "adaptive": {
+          "accuracy": 0.8046192949497182,
+          "eo_disparity": 0.008135726550031364
+        }
+      },
+      "label_noise_0.1": {
+        "baseline": {
+          "accuracy": 0.804066747706929,
+          "eo_disparity": 0.039931319824215106
+        },
+        "greedy": {
+          "accuracy": 0.7930158028511438,
+          "eo_disparity": 0.010075109487394762
+        },
+        "adaptive": {
+          "accuracy": 0.7968836335506686,
+          "eo_disparity": 0.01802476419554186
+        }
+      },
+      "label_noise_0.2": {
+        "baseline": {
+          "accuracy": 0.7971046524477843,
+          "eo_disparity": 0.06948951265817999
+        },
+        "greedy": {
+          "accuracy": 0.7821858768924743,
+          "eo_disparity": 0.0029211766396635697
+        },
+        "adaptive": {
+          "accuracy": 0.7852801414520941,
+          "eo_disparity": 0.019225910882177205
+        }
+      },
+      "label_noise_0.3": {
+        "baseline": {
+          "accuracy": 0.795115482373743,
+          "eo_disparity": 0.060544449234911896
+        },
+        "greedy": {
+          "accuracy": 0.7758868383246768,
+          "eo_disparity": 0.007099472796448014
+        },
+        "adaptive": {
+          "accuracy": 0.7821858768924743,
+          "eo_disparity": 0.010559198832134464
+        }
+      }
+    }
+  }
+}

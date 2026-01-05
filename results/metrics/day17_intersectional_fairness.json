@@ -1,0 +1,143 @@
+{
+  "baseline": {
+    "accuracy": 0.8151294912478247,
+    "intersectional": {
+      "n_groups": 4,
+      "group_metrics": {
+        "0": {
+          "attributes": {
+            "gender": 0,
+            "race": 0
+          },
+          "size": 811,
+          "positive_rate": 0.11713933415536375,
+          "tpr": 0.40540540540540543,
+          "fpr": 0.03194888178913738,
+          "accuracy": 0.8397040690505548
+        },
+        "1": {
+          "attributes": {
+            "gender": 0,
+            "race": 1
+          },
+          "size": 5759,
+          "positive_rate": 0.17190484459107483,
+          "tpr": 0.40630182421227196,
+          "fpr": 0.06455696202531645,
+          "accuracy": 0.7692307692307693
+        },
+        "2": {
+          "attributes": {
+            "gender": 1,
+            "race": 0
+          },
+          "size": 632,
+          "positive_rate": 0.061708860759493674,
+          "tpr": 0.4318181818181818,
+          "fpr": 0.034013605442176874,
+          "accuracy": 0.9287974683544303
+        },
+        "3": {
+          "attributes": {
+            "gender": 1,
+            "race": 1
+          },
+          "size": 2567,
+          "positive_rate": 0.09193611219322166,
+          "tpr": 0.39490445859872614,
+          "fpr": 0.04971149578339991,
+          "accuracy": 0.8823529411764706
+        }
+      },
+      "max_dp_disparity": 0.11019598383158116,
+      "max_eo_disparity": 0.036913723219455685,
+      "max_tpr_disparity": 0.036913723219455685,
+      "max_fpr_disparity": 0.032608080236179074,
+      "avg_pairwise_dp": 0.05929852890948093,
+      "avg_pairwise_eo": 0.026514336114621635
+    },
+    "single_attribute": {
+      "gender": {
+        "dp_disparity": 0.07918023278773854,
+        "eo_disparity": 0.013633640646576232
+      },
+      "race": {
+        "dp_disparity": 0.054387486767981594,
+        "eo_disparity": 0.026215991040100965
+      }
+    }
+  },
+  "adaptive": {
+    "accuracy": 0.8136963865288156,
+    "intersectional": {
+      "n_groups": 4,
+      "group_metrics": {
+        "0": {
+          "attributes": {
+            "gender": 0,
+            "race": 0
+          },
+          "size": 811,
+          "positive_rate": 0.11220715166461159,
+          "tpr": 0.4,
+          "fpr": 0.027156549520766772,
+          "accuracy": 0.842170160295931
+        },
+        "1": {
+          "attributes": {
+            "gender": 0,
+            "race": 1
+          },
+          "size": 5759,
+          "positive_rate": 0.16287549921861436,
+          "tpr": 0.38584853510226647,
+          "fpr": 0.060759493670886074,
+          "accuracy": 0.7654106615731898
+        },
+        "2": {
+          "attributes": {
+            "gender": 1,
+            "race": 0
+          },
+          "size": 632,
+          "positive_rate": 0.056962025316455694,
+          "tpr": 0.4090909090909091,
+          "fpr": 0.030612244897959183,
+          "accuracy": 0.930379746835443
+        },
+        "3": {
+          "attributes": {
+            "gender": 1,
+            "race": 1
+          },
+          "size": 2567,
+          "positive_rate": 0.0884300740163615,
+          "tpr": 0.3885350318471338,
+          "fpr": 0.04660452729693742,
+          "accuracy": 0.8843007401636152
+        }
+      },
+      "max_dp_disparity": 0.10591347390215866,
+      "max_eo_disparity": 0.0336029441501193,
+      "max_tpr_disparity": 0.02324237398864265,
+      "max_fpr_disparity": 0.0336029441501193,
+      "avg_pairwise_dp": 0.05691958322578768,
+      "avg_pairwise_eo": 0.021166653901308324
+    },
+    "single_attribute": {
+      "gender": {
+        "dp_disparity": 0.07440781294382806,
+        "eo_disparity": 0.012867972840253733
+      },
+      "race": {
+        "dp_disparity": 0.05191204434538568,
+        "eo_disparity": 0.026787936219414478
+      }
+    }
+  },
+  "comparison": {
+    "gender_improvement": 5.616018686210414,
+    "race_improvement": -2.181665299010226,
+    "intersectional_improvement": 8.968965416068922
+  }
+}

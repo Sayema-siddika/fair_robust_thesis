@@ -1,0 +1,15 @@
+BASELINE EXPERIMENT RESULTS
+======================================================================
+
+Configuration:
+  Dataset: compas
+  Noise rate: 10.0%
+  Noise type: random
+  Epochs: 100
+  Learning rate: 0.01
+
+Results:
+  Accuracy: 0.6928
+  DP Disparity: 0.2554
+  EO Disparity: 0.3084
+  EOP Disparity: 0.3084

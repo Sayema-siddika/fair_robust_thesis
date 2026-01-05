@@ -1,0 +1,433 @@
+\chapter{Discussion}
+\label{ch:discussion}
+
+This chapter interprets the experimental results, discusses practical implications, analyzes limitations, and provides deployment guidance. We organize the discussion around key themes: the fairness-calibration dilemma (\S\ref{sec:disc_calibration}), dataset dependency (\S\ref{sec:disc_datasets}), mechanism insights (\S\ref{sec:disc_mechanism}), practical deployment (\S\ref{sec:disc_deployment}), limitations (\S\ref{sec:limitations}), and future work (\S\ref{sec:future_work}).
+
+\section{The Fairness-Calibration Dilemma}
+\label{sec:disc_calibration}
+
+\subsection{A Fundamental Trade-off}
+
+Our results reveal a \textbf{fundamental tension} between equalized odds and calibration. Achieving perfect fairness (EO = 0.000) causes Expected Calibration Error to increase by \textbf{+388\% on German} and \textbf{+756\% on Adult}. This raises a critical question: \emph{Is this trade-off inherent or a limitation of our method?}
+
+\textbf{Evidence for inherent tension}:
+\begin{enumerate}
+    \item \textbf{Theoretical perspective}: Pleiss et al.~\cite{pleiss2017fairness} proved that calibration within groups + sufficiently different base rates $\Rightarrow$ impossibility of equalized odds. Our empirical finding quantifies the \emph{degree} of this incompatibility.
+    
+    \item \textbf{Mechanism perspective}: Our weight formula $(c_i \times r_i)^{1/T}$ inherently pushes predictions toward extremes (0 or 1) to maximize weighted loss for confident correct samples. This conflicts with calibration's requirement for moderate probabilities.
+    
+    \item \textbf{Empirical consistency}: The pattern holds across datasets (German, Adult) and temperatures, suggesting a systematic rather than accidental phenomenon.
+\end{enumerate}
+
+\subsection{Implications for Different Applications}
+
+The fairness-calibration trade-off has different implications depending on deployment context:
+
+\textbf{When calibration is critical} (e.g., medical diagnosis, insurance pricing):
+\begin{itemize}
+    \item Degraded calibration is \textbf{unacceptable} because downstream decisions rely on probability estimates
+    \item Example: A 90\% predicted risk must \emph{actually} correspond to 90\% observed risk
+    \item \textbf{Recommendation}: Use post-processing methods (Calibrated EO~\cite{pleiss2017fairness}) or recalibration techniques (Platt scaling, isotonic regression)
+\end{itemize}
+
+\textbf{When binary decisions matter} (e.g., loan approval, hiring screening):
+\begin{itemize}
+    \item Only threshold-based decisions ($\hat{y} > 0.5$) are used, not probabilities
+    \item Calibration degradation is \textbf{acceptable} as long as accuracy remains high
+    \item \textbf{Recommendation}: Our method is suitable — perfect fairness with minimal accuracy loss (-0.9\% to -1.8\%)
+\end{itemize}
+
+\textbf{When both are important}:
+\begin{itemize}
+    \item Hybrid approach: Use our method for fairness, then apply post-hoc recalibration
+    \item Temperature scaling~\cite{guo2017calibration} can restore calibration without affecting decision boundaries
+    \item Future work: Integrate recalibration into Algorithm~\ref{alg:adaptive}
+\end{itemize}
+
+\subsection{Comparison to Prior Work}
+
+Our quantification of the fairness-calibration trade-off (\textbf{+388-756\% ECE}) provides unprecedented detail:
+\begin{itemize}
+    \item Pleiss et al.~\cite{pleiss2017fairness}: Proved theoretical impossibility but no empirical quantification
+    \item Hardt et al.~\cite{hardt2016equality}: Post-processing EO adjustment, calibration impact not measured
+    \item Guo et al.~\cite{guo2017calibration}: Studied neural network calibration but not fairness interactions
+\end{itemize}
+
+Our contribution: \textbf{First systematic measurement} of how achieving equalized odds via in-processing affects calibration on real datasets.
+
+\section{Dataset Dependency of Effectiveness}
+\label{sec:disc_datasets}
+
+\subsection{Performance Patterns}
+
+Our method shows \textbf{dramatically different effectiveness} across datasets:
+\begin{itemize}
+    \item \textbf{German}: Perfect fairness (EO = 0.000) in 4 iterations
+    \item \textbf{Adult}: Substantial improvement (68.7\% reduction) in 10 iterations
+    \item \textbf{COMPAS}: Limited success (14.6\% reduction) after 10 iterations
+\end{itemize}
+
+What explains this variance?
+
+\subsection{Hypothesized Factors}
+
+\textbf{Sample size}:
+\begin{itemize}
+    \item German: n=1,000 (smallest) — \emph{best results}
+    \item COMPAS: n=6,172 (medium) — \emph{worst results}
+    \item Adult: n=45,222 (largest) — \emph{medium results}
+\end{itemize}
+
+\textbf{Observation}: No clear correlation with sample size. Small datasets are \emph{not} necessarily easier.
+
+\textbf{Group imbalance structure}:
+\begin{itemize}
+    \item German: Age $<$25: 15\% vs. Age $\geq$25: 85\% (highly imbalanced)
+    \item Adult: Female: 33\% vs. Male: 67\% (moderately imbalanced)
+    \item COMPAS: African-American: 51\% vs. Caucasian: 49\% (balanced)
+\end{itemize}
+
+\textbf{Hypothesis}: Greater group imbalance $\Rightarrow$ stronger confidence differences $\Rightarrow$ more effective reweighting. German's 15/85 split creates larger confidence gaps that our mechanism exploits.
+
+\textbf{Base rate differences}:
+\begin{itemize}
+    \item German: $P(Y=1 | Z=0) = 0.42$ vs. $P(Y=1 | Z=1) = 0.28$ ($\Delta = 0.14$)
+    \item Adult: $P(Y=1 | Z=0) = 0.11$ vs. $P(Y=1 | Z=1) = 0.31$ ($\Delta = 0.20$)
+    \item COMPAS: $P(Y=1 | Z=0) = 0.39$ vs. $P(Y=1 | Z=1) = 0.52$ ($\Delta = 0.13$)
+\end{itemize}
+
+\textbf{Hypothesis}: Moderate base rate differences ($\Delta \approx 0.13-0.14$) are easier to correct than large differences ($\Delta = 0.20$). This may explain why German succeeds perfectly while Adult requires more iterations.
+
+\subsection{Feature space complexity}:
+\begin{itemize}
+    \item German: 20 features (credit history, account status — relatively simple)
+    \item Adult: 14 features (age, education, occupation — complex interactions)
+    \item COMPAS: 11 features (priors, charge degree — criminal justice domain)
+\end{itemize}
+
+\textbf{Speculation}: COMPAS may have inherent prediction difficulty unrelated to fairness, limiting our method's effectiveness.
+
+\subsection{Practical Guidance}
+
+For practitioners deciding whether to use our method:
+\begin{enumerate}
+    \item \textbf{Pilot testing}: Run Algorithm~\ref{alg:adaptive} for 5-10 iterations on validation set
+    \item \textbf{Early indicators}: If EO drops significantly ($>$30\%) in first 3 iterations, method likely effective
+    \item \textbf{Fallback}: If limited progress after 5 iterations, switch to post-processing (Calibrated EO)
+    \item \textbf{Dataset characteristics}: Expect better results with:
+    \begin{itemize}
+        \item Moderate group imbalance (20/80 to 40/60)
+        \item Moderate base rate differences ($\Delta < 0.15$)
+        \item Simpler feature spaces (linear separability)
+    \end{itemize}
+\end{enumerate}
+
+\section{Mechanism Insights and Interpretability}
+\label{sec:disc_mechanism}
+
+\subsection{Why Upweighting Correct Predictions Works}
+
+The counterintuitive nature of our mechanism — upweighting samples the model \emph{already gets right} — deserves deeper analysis.
+
+\textbf{Key insight}: The mechanism exploits \textbf{confidence asymmetry} between groups. Even when both groups have similar accuracy, the disadvantaged group's correct predictions tend to have \emph{lower confidence}. This manifests as:
+\begin{equation}
+    \mathbb{E}[c_i | r_i = 1, Z = 0] < \mathbb{E}[c_i | r_i = 1, Z = 1]
+\end{equation}
+
+Our weight formula $(c_i \times r_i + \epsilon)^{1/T}$ amplifies this asymmetry, effectively:
+\begin{enumerate}
+    \item Increasing the loss contribution from disadvantaged group's confident correct predictions
+    \item Forcing the model to "pay more attention" to improving confidence for this group
+    \item Over iterations, this closes the TPR/FPR gap by rebalancing group-wise performance
+\end{enumerate}
+
+\subsection{Comparison to Human Intuition}
+
+Human fairness intuition often suggests "focus on errors to improve fairness" (similar to boosting). Our results show this is \textbf{incorrect} for equalized odds:
+\begin{itemize}
+    \item \textbf{Boosting}: Focuses on misclassified samples $\Rightarrow$ improves overall accuracy
+    \item \textbf{Our method}: Focuses on confident correct samples from disadvantaged groups $\Rightarrow$ improves group parity
+\end{itemize}
+
+This distinction highlights that \textbf{fairness optimization differs fundamentally from accuracy optimization}.
+
+\subsection{Temperature as Fairness-Stability Knob}
+
+The temperature parameter $T$ provides an elegant control mechanism:
+\begin{itemize}
+    \item \textbf{Low $T$ ($T=0.5$)}: Aggressive reweighting, fast fairness improvement, risk of instability
+    \item \textbf{High $T$ ($T=2.0$)}: Gentle reweighting, slower improvement, more stable
+\end{itemize}
+
+\textbf{Practical strategy}:
+\begin{enumerate}
+    \item Start with $T=1.0$ (balanced default)
+    \item If fairness improves but not enough, decrease $T \to 0.5$
+    \item If training becomes unstable (loss oscillates), increase $T \to 2.0$
+    \item Monitor ECE alongside EO to track calibration trade-off
+\end{enumerate}
+
+\subsection{Interpretability for Stakeholders}
+
+A major advantage of our method is \textbf{explainability}:
+\begin{itemize}
+    \item \textbf{To data scientists}: "We adjust training sample weights based on confidence and correctness, then retrain iteratively"
+    \item \textbf{To managers}: "We ensure the model performs equally well on both demographic groups by emphasizing samples where performance differs"
+    \item \textbf{To regulators}: "The method modifies only training, not production inference, and achieves measurable fairness (EO = 0.000)"
+\end{itemize}
+
+This contrasts with black-box methods (adversarial debiasing, neural architecture changes) where mechanism explanation is difficult.
+
+\section{Practical Deployment Considerations}
+\label{sec:disc_deployment}
+
+\subsection{Integration into Existing ML Pipelines}
+
+Our method requires \textbf{minimal changes} to standard workflows:
+
+\textbf{Training pipeline modifications}:
+\begin{lstlisting}[language=Python]
+# Standard training
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# Modified with our method
+weights = np.ones(len(X_train))
+for iteration in range(10):
+    model.fit(X_train, y_train, sample_weight=weights)
+    predictions = model.predict_proba(X_train)
+    weights = compute_adaptive_weights(predictions, y_train, T=1.0)
+    if check_fairness(model, X_val, y_val, z_val) < 0.01:
+        break
+\end{lstlisting}
+
+\textbf{Key points}:
+\begin{itemize}
+    \item Only training code changes (10-15 lines added)
+    \item No new dependencies beyond scikit-learn
+    \item Inference code remains \emph{identical}
+\end{itemize}
+
+\subsection{Production Deployment Benefits}
+
+\textbf{Zero inference overhead}:
+\begin{itemize}
+    \item No test-time threshold adjustments (unlike Calibrated EO)
+    \item No additional model components (unlike adversarial debiasing)
+    \item Standard model serving infrastructure works unchanged
+\end{itemize}
+
+\textbf{Monitoring and validation}:
+\begin{itemize}
+    \item Fairness metrics (EO, DP) can be computed offline on validation sets
+    \item No need for real-time fairness monitoring during inference
+    \item Standard A/B testing frameworks apply
+\end{itemize}
+
+\subsection{When to Use This Method}
+
+\textbf{Ideal use cases}:
+\begin{enumerate}
+    \item Binary classification with sensitive attributes
+    \item Decision-based deployment (loan approval, hiring screening)
+    \item Equalized odds is the desired fairness notion
+    \item Training time $<$10 seconds is acceptable
+    \item Calibration is secondary to fairness
+\end{enumerate}
+
+\textbf{Not recommended for}:
+\begin{enumerate}
+    \item Applications requiring calibrated probabilities (medical risk scoring, insurance pricing)
+    \item Real-time learning scenarios (weights require batch recomputation)
+    \item Multi-class classification (extension not validated)
+    \item Datasets where COMPAS-like limited effectiveness is observed
+\end{enumerate}
+
+\subsection{Regulatory Compliance}
+
+Our method aligns with emerging fairness regulations:
+\begin{itemize}
+    \item \textbf{EU AI Act}~\cite{veale2021demystifying}: Requires "appropriate measures to ensure fairness" — our perfect EO achievement satisfies this
+    \item \textbf{GDPR Article 22}~\cite{voigt2017eu}: Demands human oversight of automated decisions — our interpretable mechanism aids explanation
+    \item \textbf{US Equal Credit Opportunity Act}: Prohibits disparate treatment — equalized odds directly addresses disparate impact
+\end{itemize}
+
+\section{Limitations}
+\label{sec:limitations}
+
+\subsection{Calibration Degradation}
+
+The most significant limitation is \textbf{severe calibration loss} (+388-756\% ECE increase). While acceptable for decision-based applications, this makes the method unsuitable for:
+\begin{itemize}
+    \item Medical diagnosis (need probability estimates for risk communication)
+    \item Insurance pricing (premiums based on predicted probabilities)
+    \item Any domain where $P(\hat{y} = p | Y = 1)$ must actually equal $p$
+\end{itemize}
+
+\textbf{Mitigation}: Post-hoc recalibration (temperature scaling, isotonic regression) can partially restore calibration, but this introduces inference overhead and may reduce fairness.
+
+\subsection{Dataset-Dependent Effectiveness}
+
+Results vary dramatically across datasets (perfect fairness on German, limited improvement on COMPAS). This unpredictability requires:
+\begin{itemize}
+    \item Pilot testing on each new dataset
+    \item No guarantee of success
+    \item Potential need for fallback methods (post-processing)
+\end{itemize}
+
+\textbf{Future work}: Develop \emph{predictors} of method effectiveness based on dataset characteristics (group imbalance, base rate differences, feature complexity).
+
+\subsection{Single Sensitive Attribute}
+
+Our experiments use \textbf{binary sensitive attributes} (gender, race, age). Real-world fairness often requires:
+\begin{itemize}
+    \item \textbf{Intersectional fairness}~\cite{corbett2018measure}: E.g., Black women vs. white men (combinations of race $\times$ gender)
+    \item \textbf{Multiple sensitive attributes}: Simultaneous fairness across race, gender, age
+    \item \textbf{Continuous attributes}: Age as continuous rather than binary
+\end{itemize}
+
+\textbf{Extension challenge}: Weight formula $(c_i \times r_i)^{1/T}$ does not explicitly account for group membership — unclear how to generalize to intersectional fairness.
+
+\subsection{Binary Classification Only}
+
+We evaluate only on \textbf{binary classification}. Extensions to:
+\begin{itemize}
+    \item \textbf{Multi-class}: How to define $r_i$ (correctness) and $c_i$ (confidence) for $K > 2$ classes?
+    \item \textbf{Regression}: What is "equalized odds" for continuous outputs?
+    \item \textbf{Ranking}: How to ensure fairness in ranked lists (search results, recommendations)?
+\end{itemize}
+
+remain unexplored.
+
+\subsection{Logistic Regression Model Class}
+
+All experiments use \textbf{logistic regression}. Questions for neural networks:
+\begin{itemize}
+    \item Do weight updates $(c_i \times r_i)^{1/T}$ work with gradient descent?
+    \item Does batch-wise training (mini-batches) affect mechanism?
+    \item Can we handle high-dimensional inputs (images, text)?
+\end{itemize}
+
+\textbf{Preliminary consideration}: Sample weighting is supported in PyTorch (\texttt{torch.nn.BCELoss(reduction='none')}), suggesting extension is feasible but requires validation.
+
+\subsection{Fairness Notion: Equalized Odds Only}
+
+We optimize for \textbf{equalized odds}. Other fairness notions include:
+\begin{itemize}
+    \item \textbf{Demographic parity}: $P(\hat{Y}=1 | Z=0) = P(\hat{Y}=1 | Z=1)$
+    \item \textbf{Equal opportunity}: TPR parity only (subset of EO)
+    \item \textbf{Individual fairness}~\cite{dwork2012fairness}: Similar individuals treated similarly
+\end{itemize}
+
+\textbf{Question}: Does our weight formula $(c_i \times r_i)^{1/T}$ work for demographic parity? Preliminary experiments (not reported) suggest \emph{no} — mechanism targets TPR/FPR, not overall prediction rates.
+
+\section{Future Work}
+\label{sec:future_work}
+
+\subsection{Integrated Recalibration}
+
+\textbf{Goal}: Achieve both fairness \emph{and} calibration simultaneously.
+
+\textbf{Approach}:
+\begin{enumerate}
+    \item Modify Algorithm~\ref{alg:adaptive} to include recalibration step after each iteration
+    \item Apply temperature scaling~\cite{guo2017calibration} to restore calibration while preserving decision boundaries
+    \item Jointly optimize: $\min_{\theta, \tau} \mathcal{L}_{\text{weighted}} + \lambda \cdot \text{ECE}_{\tau}$
+\end{enumerate}
+
+\textbf{Challenge}: Recalibration may shift decision boundaries, affecting fairness.
+
+\subsection{Automatic Temperature Selection}
+
+\textbf{Goal}: Eliminate manual temperature tuning.
+
+\textbf{Approach}:
+\begin{enumerate}
+    \item Grid search $T \in \{0.1, 0.5, 1.0, 2.0, 5.0\}$ on validation set
+    \item Select $T$ maximizing: $\text{Fairness Score} - \alpha \cdot \text{Calibration Penalty}$
+    \item \textbf{Fairness Score}: $1 - \text{EO}$ (higher is better)
+    \item \textbf{Calibration Penalty}: ECE (lower is better)
+    \item Hyperparameter $\alpha$: User-specified fairness-calibration trade-off preference
+\end{enumerate}
+
+\textbf{Expected benefit}: Automate deployment, reduce need for expert tuning.
+
+\subsection{Theoretical Analysis}
+
+\textbf{Open questions}:
+\begin{enumerate}
+    \item \textbf{Convergence guarantees}: Does Algorithm~\ref{alg:adaptive} always converge? To what solution?
+    \item \textbf{Optimality}: Is the achieved fairness-accuracy trade-off Pareto-optimal?
+    \item \textbf{Sample complexity}: How many samples needed to guarantee $\text{EO} < \delta$?
+\end{enumerate}
+
+\textbf{Approach}: Analyze weight dynamics as a dynamical system, potentially using tools from online learning theory.
+
+\subsection{Extension to Neural Networks}
+
+\textbf{Goal}: Scale method to deep learning.
+
+\textbf{Technical challenges}:
+\begin{itemize}
+    \item Mini-batch training: Weights must be recomputed per epoch, not per batch
+    \item Gradient descent: Does iterative reweighting interfere with momentum/Adam?
+    \item High-dimensional data: Do confidence asymmetries persist for images/text?
+\end{itemize}
+
+\textbf{Preliminary experiments needed}: MNIST with gender labels, CelebA with attribute fairness.
+
+\subsection{Intersectional Fairness}
+
+\textbf{Goal}: Extend to multiple sensitive attributes (race $\times$ gender).
+
+\textbf{Approach}:
+\begin{enumerate}
+    \item Define intersectional groups: $Z_{\text{intersect}} = (Z_1, Z_2, \ldots, Z_k)$
+    \item Require pairwise EO between all groups: $\forall g, g': \text{EO}(g, g') < \delta$
+    \item Modify weight formula to account for group membership:
+    \begin{equation}
+        w_i = (c_i \times r_i + \epsilon)^{1/T} \cdot \gamma_{z_i}
+    \end{equation}
+    where $\gamma_z$ are group-specific multipliers
+\end{itemize}
+
+\textbf{Challenge}: Combinatorial explosion of group comparisons ($O(2^k)$ groups for $k$ binary attributes).
+
+\subsection{Fairness-Robustness Connections}
+
+\textbf{Observation}: Our method adjusts sample weights, similar to adversarial training~\cite{goodfellow2014explaining}.
+
+\textbf{Research question}: Do fairness-improved models exhibit greater \emph{robustness} to adversarial examples or distribution shift?
+
+\textbf{Hypothesis}: Upweighting disadvantaged group samples may implicitly regularize the model, improving generalization.
+
+\textbf{Experiment}: Evaluate adversarial accuracy (FGSM, PGD attacks) for fair vs. unfair models.
+
+\subsection{Real-World Deployment Study}
+
+\textbf{Goal}: Validate method in production environment.
+
+\textbf{Case study proposal}:
+\begin{itemize}
+    \item \textbf{Domain}: Credit scoring (collaboration with financial institution)
+    \item \textbf{Dataset}: Proprietary credit application data (n $>$ 100,000)
+    \item \textbf{Metrics}: Business KPIs (approval rate, default rate) + fairness (EO, DP)
+    \item \textbf{Comparison}: A/B test against current production model
+    \item \textbf{Timeline}: 6-month deployment with monthly fairness audits
+\end{itemize}
+
+\textbf{Expected insights}: Real-world effectiveness, stakeholder reactions, regulatory acceptance.
+
+\section{Summary}
+
+This chapter discussed the implications of our experimental findings. Key takeaways:
+\begin{enumerate}
+    \item \textbf{Fairness-calibration dilemma}: Fundamental trade-off quantified (+388-756\% ECE); acceptable for decision-based applications but not probability-based ones
+    \item \textbf{Dataset dependency}: Effectiveness varies (perfect on German, limited on COMPAS); pilot testing essential
+    \item \textbf{Mechanism interpretability}: Counterintuitive upweighting of confident correct predictions explained via confidence asymmetry
+    \item \textbf{Practical deployment}: Zero inference overhead, minimal code changes, regulatory compliance alignment
+    \item \textbf{Limitations}: Calibration degradation, dataset unpredictability, binary classification/single attribute restrictions
+    \item \textbf{Future directions}: Integrated recalibration, neural network extension, intersectional fairness, theoretical analysis
+\end{enumerate}
+
+The final chapter concludes the thesis by synthesizing contributions and reflecting on the broader implications for fair machine learning.

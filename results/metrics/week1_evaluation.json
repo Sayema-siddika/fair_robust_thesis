@@ -1,0 +1,62 @@
+{
+  "compas": {
+    "baseline": {
+      "accuracy": 0.6922246220302376,
+      "dp_disparity": 0.2544082486551106,
+      "eo_disparity": 0.3045292716855681,
+      "eop_disparity": 0.3045292716855681
+    },
+    "greedy": {
+      "accuracy": 0.6927645788336934,
+      "dp_disparity": 0.2552441347878063,
+      "eo_disparity": 0.30241906962487913,
+      "eop_disparity": 0.30241906962487913
+    },
+    "meta": {
+      "accuracy": 0.6916846652267818,
+      "dp_disparity": 0.266376830543933,
+      "eo_disparity": 0.26894466319288896,
+      "eop_disparity": 0.26894466319288896
+    }
+  },
+  "adult": {
+    "baseline": {
+      "accuracy": 0.809260691789148,
+      "dp_disparity": 0.08858167043172689,
+      "eo_disparity": 0.051821764354383626,
+      "eop_disparity": 0.051821764354383626
+    },
+    "greedy": {
+      "accuracy": 0.8073820311636645,
+      "dp_disparity": 0.08579995204030408,
+      "eo_disparity": 0.0525509239298978,
+      "eop_disparity": 0.0525509239298978
+    },
+    "meta": {
+      "accuracy": 0.7992043319703834,
+      "dp_disparity": 0.05065154591580608,
+      "eo_disparity": 0.011200617213914549,
+      "eop_disparity": 0.011200617213914549
+    }
+  },
+  "german": {
+    "baseline": {
+      "accuracy": 0.72,
+      "dp_disparity": 0.2318840579710145,
+      "eo_disparity": 0.3142857142857143,
+      "eop_disparity": 0.3142857142857143
+    },
+    "greedy": {
+      "accuracy": 0.7233333333333334,
+      "dp_disparity": 0.2463768115942029,
+      "eo_disparity": 0.34285714285714286,
+      "eop_disparity": 0.34285714285714286
+    },
+    "meta": {
+      "accuracy": 0.72,
+      "dp_disparity": 0.6666666666666666,
+      "eo_disparity": 0.7428571428571429,
+      "eop_disparity": 0.7428571428571429
+    }
+  }
+}

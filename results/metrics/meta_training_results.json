@@ -1,0 +1,26 @@
+{
+  "baseline": {
+    "accuracy": 0.6922246220302376,
+    "dp_disparity": 0.2544082486551106,
+    "eo_disparity": 0.3045292716855681,
+    "eop_disparity": 0.3045292716855681
+  },
+  "greedy": {
+    "accuracy": 0.6927645788336934,
+    "dp_disparity": 0.2552441347878063,
+    "eo_disparity": 0.30241906962487913,
+    "eop_disparity": 0.30241906962487913
+  },
+  "meta": {
+    "accuracy": 0.6916846652267818,
+    "dp_disparity": 0.266376830543933,
+    "eo_disparity": 0.26894466319288896,
+    "eop_disparity": 0.26894466319288896
+  },
+  "training_history": {
+    "final_train_loss": 0.7525467872619629,
+    "final_val_loss": 0.703551372885704,
+    "final_val_accuracy": 0.5414310470223427,
+    "final_val_fairness": 0.05912744104862213
+  }
+}
