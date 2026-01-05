@@ -1,9 +1,7 @@
 # Fair and Robust Training with Meta-Learning
 
-BSc Thesis Project - Combining Meta-Learning, Adaptive Control, and Pareto Optimization for Fair and Robust Machine Learning
-
 ## Author
-[Your Name]
+Sayema Siddika
 
 ## Abstract
 This thesis addresses the challenge of training machine learning models that are both fair (unbiased across demographic groups) and robust (resilient to label noise). We propose a novel framework that combines:
@@ -76,9 +74,3 @@ See `results/metrics/` for detailed experimental results.
 ## Base Paper
 Roh et al. "Sample Selection for Fair and Robust Training" (NeurIPS 2021)
 - Repository: https://github.com/yuji-roh/fair-robust-selection
-
-## License
-Academic use only
-
-## Contact
-[Your Email]
